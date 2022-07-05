@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { getAPIBaseURL } from "../../lib/.config";
 import Breadcrumb from '../../components/breadcrumb';
 import HeaderComponent from "../../components/header";
 import ProductList from '../../components/productList';
@@ -10,7 +11,8 @@ const Root = styled.div`
   min-height: 100vh;
 `
 
-const ItemsResults: NextPage = () => {
+const ItemsResults: NextPage = (props) => {
+  
   return (
     <Root>
       <Head>
@@ -19,15 +21,46 @@ const ItemsResults: NextPage = () => {
       </Head>
       <HeaderComponent />
       <Breadcrumb />
-      <ProductList />
+      <ProductList props={props} />
     </Root>
   )
 }
 
-export async function getServerSideProps() {
+
+export async function getServerSideProps(context: any) {
+  const searchValue = context.query.search;
+  console.log(searchValue);
+  const url = getAPIBaseURL()
+  const options = {
+    method: "get",
+    headers: {
+      Accept: "application/json",
+      Authorization: "Bearer" + process.env.VERCEL,
+      "Content-Type": "application/json",
+    }
+  }
+  // const response = await fetch(url)
+  // .then(res => res.json())
+  // .then(res => console.log(res))
+
+  //console.log(response);
+  
+  try {
+    await fetch(url)
+    .then(res => res.json())
+    .then(res => console.log(res))
+  } catch (error) {
+    console.log(error, "ERRORASO");
+    
+  }
+  
+
   return {
-    props: {}, // will be passed to the page component as props
+    props: {
+      
+    },
   }
 }
 
 export default ItemsResults
+

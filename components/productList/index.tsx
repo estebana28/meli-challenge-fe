@@ -1,16 +1,25 @@
 import { Grid } from '@mui/material'
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import ItemList from './itemList'
+import { useRouter } from 'next/router'
 
-function ProductList() {
+interface PropsType {
+  props: any
+}
+
+const ProductList: FunctionComponent<PropsType> = (props) => {
+  const itemList = [1, 2, 3]
+  console.log(props.props.searchValue);
+
+  
+
   return (
     <>
       <Grid container justifyContent="center">
         <Grid item xs={9}>
-          <ItemList />
-          <ItemList />
-          <ItemList />
-          <ItemList />
+          {itemList.map((item) => {
+            return <ItemList key={item} />
+          })}
         </Grid>
       </Grid>
     </>
@@ -18,3 +27,4 @@ function ProductList() {
 }
 
 export default ProductList
+
