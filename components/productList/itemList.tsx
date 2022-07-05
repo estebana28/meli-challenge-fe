@@ -3,32 +3,27 @@ import Grid from '@mui/material/Grid';
 import { Root, StyledCard, StyledCardContent, StyledImage, StyledPrice, StyledLocation, StyledDescription, StyledIcon, AnchorLink, StyledPriceWrapper } from "./itemList.styled";
 import Link from 'next/link';
 import { getFormatedPrice } from "../../lib/aux"
-
 interface PropsType {
   props: any
   item: any
 }
 
-
 const ItemList: FunctionComponent<PropsType> = (props: any) => {
-  const { price, address, title, thumbnail } = props.props
-  //console.log(props.props);
-  
-
+  const { price, address, title, thumbnail, id } = props.props  
 
   return (
     <Root>
       <StyledCard>
         <StyledCardContent>
-          <Grid container justifyContent="center">
-            <Grid item xs={3}>
-              <Link href={"/"} passHref>
+          <Grid container wrap='nowrap' spacing={2}>
+            <Grid item>
+              <Link href={`/items/${id}`} passHref>
                 <AnchorLink>
                   <StyledImage src={thumbnail} alt={title} />
                 </AnchorLink>
               </Link>
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={10}>
               <Grid container direction="column">
                 <Grid container justifyContent="space-between" alignItems="center">
                   <div>
@@ -41,8 +36,8 @@ const ItemList: FunctionComponent<PropsType> = (props: any) => {
                   </div>
                   <StyledLocation>{address.state_name}</StyledLocation>
                 </Grid>
-                <Grid item>
-                  <Link href={"/"} passHref>
+                <Grid item xs>
+                  <Link href={`/items/${id}`} passHref>
                     <AnchorLink>
                       <StyledDescription>{title}</StyledDescription>
                     </AnchorLink>
@@ -51,8 +46,6 @@ const ItemList: FunctionComponent<PropsType> = (props: any) => {
               </Grid>
             </Grid>
           </Grid>
-      
-
         </StyledCardContent>
       </StyledCard>
     </Root>

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import axios from "axios"
@@ -7,7 +6,6 @@ import Breadcrumb from '../../components/breadcrumb';
 import HeaderComponent from "../../components/header";
 import ProductList from '../../components/productList';
 import styled from "../../theme/styled-components"
-import { rejects } from 'assert';
 
 const Root = styled.div`
   background-color: ${({ theme }) => theme.colors.bggray};
@@ -38,7 +36,8 @@ export async function getServerSideProps(context: any) {
     axios.get(`${url}/items?q=${searchValue}`)
     .then(res => resolve(res.data))
   }).catch((error) => console.log(error))
-
+  console.log(apiResponse);
+  
   return {
     props: {
       apiResponse

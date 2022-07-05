@@ -9,7 +9,9 @@ export const Root = styled.div`
   width: 100%;
 `
 
-export const StyledCard = styled(Card)``
+export const StyledCard = styled(Card)`
+  width: 100%;
+`
 
 export const StyledCardContent = styled(CardContent)``
 
@@ -34,7 +36,6 @@ export const StyledImage = styled(Image).attrs(() => ({
   width: 180,
   height: 180
 }))`
-  margin: 16px;
   border-radius: 4px;
   `
 

@@ -1,9 +1,11 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import axios from "axios"
+import { getAPIBaseURL } from "../../lib/.config";
 import Breadcrumb from '../../components/breadcrumb';
 import HeaderComponent from "../../components/header";
 
-const ItemDescription: NextPage = () => {
+const ItemDescription: NextPage = (props) => {
   return (
     <div>
       <Head>
@@ -13,14 +15,23 @@ const ItemDescription: NextPage = () => {
       </Head>
       <HeaderComponent />
       <Breadcrumb />
-      <h1>Soy un h1 en items result</h1>
     </div>
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context: any) {
+  const searchId = context.params.item;
+  const url = getAPIBaseURL()
+  
+  const apiResponse = await new Promise((resolve, reject) => {
+    axios.get(`${url}/items/${searchId}`)
+    .then(res => resolve(res.data))
+  }).catch((error) => console.log(error))
+  
   return {
-    props: {}, // will be passed to the page component as props
+    props: {
+      apiResponse
+    },
   }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ProductDescription() {
+const ProductDescription = () => {
   return (
     //breadcrumb
     <div>ProductDescription</div>
