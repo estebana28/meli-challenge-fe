@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import Grid from '@mui/material/Grid';
 import { Root, StyledCard, StyledCardContent, StyledImage, StyledPrice, StyledLocation, StyledDescription, StyledIcon, AnchorLink, StyledPriceWrapper } from "./itemList.styled";
 import Link from 'next/link';
+import { getFormatedPrice } from "../../lib/aux"
 
-function ItemList() {
+interface PropsType {
+  props: any
+  item: any
+}
+
+
+const ItemList: FunctionComponent<PropsType> = (props: any) => {
+  const { price, address, title, thumbnail } = props.props
+  //console.log(props.props);
+  
+
+
   return (
     <Root>
       <StyledCard>
@@ -12,7 +24,7 @@ function ItemList() {
             <Grid item xs={3}>
               <Link href={"/"} passHref>
                 <AnchorLink>
-                  <StyledImage src={"/assets/Logo_ML.png"} />
+                  <StyledImage src={thumbnail} alt={title} />
                 </AnchorLink>
               </Link>
             </Grid>
@@ -22,17 +34,17 @@ function ItemList() {
                   <div>
                     <Grid container  alignItems="center">
                       <StyledPriceWrapper>
-                        <StyledPrice>$ 1.980</StyledPrice>
+                        <StyledPrice>{getFormatedPrice(price)}</StyledPrice>
                       </StyledPriceWrapper>
                       {true && <StyledIcon src={"/assets/ic_shipping.png"} />}
                     </Grid>
                   </div>
-                  <StyledLocation>Capital Federal</StyledLocation>
+                  <StyledLocation>{address.state_name}</StyledLocation>
                 </Grid>
                 <Grid item>
                   <Link href={"/"} passHref>
                     <AnchorLink>
-                      <StyledDescription>Apple Ipod Touch 5g 16GB Negro Igual A Nuevo Completo Unico!</StyledDescription>
+                      <StyledDescription>{title}</StyledDescription>
                     </AnchorLink>
                   </Link>
                 </Grid>

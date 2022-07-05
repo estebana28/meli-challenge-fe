@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import axios from "axios"
 import { getAPIBaseURL } from "../../lib/.config";
 import Breadcrumb from '../../components/breadcrumb';
 import HeaderComponent from "../../components/header";
 import ProductList from '../../components/productList';
 import styled from "../../theme/styled-components"
+import { rejects } from 'assert';
 
 const Root = styled.div`
   background-color: ${({ theme }) => theme.colors.bggray};
@@ -29,35 +32,16 @@ const ItemsResults: NextPage = (props) => {
 
 export async function getServerSideProps(context: any) {
   const searchValue = context.query.search;
-  console.log(searchValue);
   const url = getAPIBaseURL()
-  const options = {
-    method: "get",
-    headers: {
-      Accept: "application/json",
-      Authorization: "Bearer" + process.env.VERCEL,
-      "Content-Type": "application/json",
-    }
-  }
-  // const response = await fetch(url)
-  // .then(res => res.json())
-  // .then(res => console.log(res))
-
-  //console.log(response);
   
-  try {
-    await fetch(url)
-    .then(res => res.json())
-    .then(res => console.log(res))
-  } catch (error) {
-    console.log(error, "ERRORASO");
-    
-  }
-  
+  const apiResponse = await new Promise((resolve, reject) => {
+    axios.get(`${url}/items?q=${searchValue}`)
+    .then(res => resolve(res.data))
+  }).catch((error) => console.log(error))
 
   return {
     props: {
-      
+      apiResponse
     },
   }
 }
