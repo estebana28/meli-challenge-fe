@@ -4,17 +4,22 @@ import axios from "axios"
 import { getAPIBaseURL } from "../../lib/.config";
 import Breadcrumb from '../../components/breadcrumb';
 import HeaderComponent from "../../components/header";
+import ProductDescription from '../../components/productDescription';
 
 const ItemDescription: NextPage = (props) => {
+  const { description } = props.apiResponse.response.item
+  
+  
   return (
     <div>
       <Head>
         {/* Agregar data del producto */}
         <title>Mercado Libre Argentina - ACA</title>
-        <meta name="description" content="Comprá productos con Envío Gratis en el día en Mercado Libre Argentina. Encontrá miles de marcas y productos a precios increíbles." />
+        <meta name="product description" content={description} />
       </Head>
       <HeaderComponent />
       <Breadcrumb />
+      <ProductDescription props={props.apiResponse.response.item} />
     </div>
   )
 }

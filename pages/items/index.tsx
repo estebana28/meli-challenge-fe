@@ -36,7 +36,6 @@ export async function getServerSideProps(context: any) {
     axios.get(`${url}/items?q=${searchValue}`)
     .then(res => resolve(res.data))
   }).catch((error) => console.log(error))
-  console.log(apiResponse);
   
   return {
     props: {

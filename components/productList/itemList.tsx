@@ -9,7 +9,8 @@ interface PropsType {
 }
 
 const ItemList: FunctionComponent<PropsType> = (props: any) => {
-  const { price, address, title, thumbnail, id } = props.props  
+  const { price, address, title, picture, id, free_shipping } = props.props.item 
+  
 
   return (
     <Root>
@@ -19,7 +20,7 @@ const ItemList: FunctionComponent<PropsType> = (props: any) => {
             <Grid item>
               <Link href={`/items/${id}`} passHref>
                 <AnchorLink>
-                  <StyledImage src={thumbnail} alt={title} />
+                  <StyledImage src={picture} alt={title} />
                 </AnchorLink>
               </Link>
             </Grid>
@@ -29,12 +30,12 @@ const ItemList: FunctionComponent<PropsType> = (props: any) => {
                   <div>
                     <Grid container  alignItems="center">
                       <StyledPriceWrapper>
-                        <StyledPrice>{getFormatedPrice(price)}</StyledPrice>
+                        <StyledPrice>{getFormatedPrice(price.currency, price.amount)}</StyledPrice>
                       </StyledPriceWrapper>
-                      {true && <StyledIcon src={"/assets/ic_shipping.png"} />}
+                      {free_shipping && <StyledIcon src={"/assets/ic_shipping.png"} />}
                     </Grid>
                   </div>
-                  <StyledLocation>{address.state_name}</StyledLocation>
+                  <StyledLocation>{address?.state_name}</StyledLocation>
                 </Grid>
                 <Grid item xs>
                   <Link href={`/items/${id}`} passHref>
