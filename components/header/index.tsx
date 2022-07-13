@@ -24,7 +24,6 @@ function HeaderComponent() {
       router.push(`/items?search=${query}`)
     }
   
-    //console.log(watch("search"))
 
   return (
     <Root>

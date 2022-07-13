@@ -2,31 +2,57 @@ import { Grid } from '@mui/material'
 import React, { FunctionComponent, useState, useEffect } from 'react'
 import ItemList from './itemList'
 
+interface AuthorType {
+  name: string
+  lastname: string
+}
+
+interface PriceType {
+  amount: number
+  currency: string
+  decimals: string
+}
+  
+interface ItemData {
+  id: String,
+  title: String, 
+  price: { 
+    currency: String, 
+    amount: Number, 
+    decimals: Number
+  },
+  picture: String, 
+  condition: String, 
+  free_shipping: Boolean
+}
+
 interface PropsType {
-  props: any
+  props: {
+    author: AuthorType
+    categories: []
+    items: ItemData[]
+  }
 }
 
-interface ItemType {
-  item: {}
-  id: string
-}
-
-const ProductList: FunctionComponent<PropsType> = (props) => {
+const ProductList = (props: PropsType) => {
   const [itemList, setItemList] = useState([])
-  useEffect(() => {
-    if (props) {
-      setItemList(props.props.apiResponse.response)
-    }
-  }, [props])
+  console.info(props.props);
+  
+  // useEffect(() => {
+  //   if (props) {
+  //     setItemList(props.props)
+  //   }
+  // }, [props])
   
 
   return (
     <>
       <Grid container justifyContent="center">
         <Grid item xs={9}>
-          {itemList.map((item: ItemType) => {
+          {/* {itemList.map((item) => {
+            console.log(item);
             return <ItemList key={item.id} props={item} />
-          })}
+          })} */}
         </Grid>
       </Grid>
     </>

@@ -3,14 +3,18 @@ import Grid from '@mui/material/Grid';
 import { Root, StyledCard, StyledCardContent, StyledImage, StyledPrice, StyledLocation, StyledDescription, StyledIcon, AnchorLink, StyledPriceWrapper } from "./itemList.styled";
 import Link from 'next/link';
 import { getFormatedPrice } from "../../lib/aux"
+
+interface PriceType {
+  amount: number
+  currency: string
+  decimals: string
+}
 interface PropsType {
-  props: any
-  item: any
+  price: PriceType
 }
 
-const ItemList: FunctionComponent<PropsType> = (props: any) => {
-  const { price, address, title, picture, id, free_shipping } = props.props.item 
-  
+const ItemList: FunctionComponent<PropsType> = ({ price, address, title, picture, id, free_shipping }) => {
+  console.log(price);
 
   return (
     <Root>

@@ -12,7 +12,7 @@ const Root = styled.div`
   min-height: 100vh;
 `
 
-const ItemsResults: NextPage = (props) => {
+const ItemsResults: NextPage = (props: any) => {
   
   return (
     <Root>
@@ -22,7 +22,7 @@ const ItemsResults: NextPage = (props) => {
       </Head>
       <HeaderComponent />
       <Breadcrumb />
-      <ProductList props={props} />
+      <ProductList props={props.apiResponse.response} />
     </Root>
   )
 }
